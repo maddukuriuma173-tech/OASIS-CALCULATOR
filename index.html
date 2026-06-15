@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OASIS Calculator - Modern Web Application</title>
+    <meta name="description" content="Premium, responsive, glassmorphism calculator web application for OASIS internship submission, featuring scientific mode, history tracking, custom sounds, and an automated test suite.">
+    
+    <!-- Google Fonts for Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- Link to Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Favicon Icon -->
+    <link rel="icon" type="image/png" href="logo.png">
+</head>
+<body>
+    <!-- Animated Background Mesh Blobs -->
+    <div class="bg-blobs-container">
+        <div class="bg-blob blob-1"></div>
+        <div class="bg-blob blob-2"></div>
+        <div class="bg-blob blob-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Main Calculator Container -->
+        <main class="calculator-card" id="calculator-card">
+            <!-- Header Controls -->
+            <header class="calc-header">
+                <div class="brand">
+                    <span class="brand-logo">OASIS</span>
+                    <span class="brand-sub">CALCULATOR</span>
+                </div>
+                
+                <div class="controls-group">
+                    <!-- Audio/Sound Toggle -->
+                    <button class="icon-btn" id="sound-toggle" title="Toggle Sound" aria-label="Toggle Sound">
+                        <svg class="icon sound-on-icon" viewBox="0 0 24 24" width="18" height="18">
+                            <path fill="currentColor" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.85 14,18.71V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.77 16.5,12M3,9V15H7L12,20V4L7,9H3Z" />
+                        </svg>
+                        <svg class="icon sound-off-icon hidden" viewBox="0 0 24 24" width="18" height="18">
+                            <path fill="currentColor" d="M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.44 14,18.71V20.77C15.38,20.44 16.63,19.79 17.7,18.9L20.73,21.93L22,20.66L4.27,3M12,4L9.91,6.09L12,8.18V4M19,12C19,15.17 16.89,17.85 14,18.71V16.71C15.5,15.93 16.5,14.07 16.5,12C16.5,11.23 16.25,10.5 15.83,9.88L17.37,8.34C18.4,9.37 19,10.63 19,12M16.5,8L14.7,9.8L14,9.1V7.97C15,8.53 15.77,9.08 16.5,8Z" />
+                        </svg>
+                    </button>
+
+                    <!-- Scientific Mode Toggle -->
+                    <button class="text-toggle-btn" id="sci-toggle" title="Toggle Scientific Mode">
+                        <span>SCI</span>
+                    </button>
+
+                    <!-- Theme Toggle (Dark/Light) -->
+                    <button class="icon-btn" id="theme-toggle" title="Toggle Theme" aria-label="Toggle Theme">
+                        <!-- Sun Icon for Light Mode -->
+                        <svg class="icon sun-icon" viewBox="0 0 24 24" width="18" height="18">
+                            <path fill="currentColor" d="M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z" />
+                        </svg>
+                        <!-- Moon Icon for Dark Mode -->
+                        <svg class="icon moon-icon hidden" viewBox="0 0 24 24" width="18" height="18">
+                            <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4Z" />
+                        </svg>
+                    </button>
+
+                    <!-- History Toggle -->
+                    <button class="icon-btn" id="history-toggle" title="Toggle History" aria-label="Toggle History">
+                        <svg class="icon" viewBox="0 0 24 24" width="18" height="18">
+                            <path fill="currentColor" d="M13,3A9,9 0 0,0 4,12H1L4.89,15.89L4.9,16L9,12H6A7,7 0 0,1 13,5A7,7 0 0,1 20,12A7,7 0 0,1 13,19C11.07,19 9.32,18.21 8.06,16.94L6.64,18.36C8.27,20 10.5,21 13,21A9,9 0 0,0 22,12A9,9 0 0,0 13,3M12,8V13L16.28,15.54L17,14.33L13.5,12.25V8H12Z" />
+                        </svg>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Interactive Screen Display -->
+            <section class="display-container" aria-live="polite">
+                <!-- Memory Indicator -->
+                <div class="memory-indicator hidden" id="memory-indicator">M</div>
+                <!-- Expression / Formula -->
+                <div class="expression-display" id="expression-display" aria-label="Current Expression"></div>
+                <!-- Main Result -->
+                <div class="result-display" id="result-display" aria-label="Calculation Result">0</div>
+            </section>
+
+            <!-- Keypads Area -->
+            <section class="keypad-area">
+                <!-- Scientific Keys Panel (starts collapsed) -->
+                <div class="scientific-panel collapsed" id="scientific-panel">
+                    <!-- Row 1 -->
+                    <button class="key-btn sci-btn" data-action="sin" id="btn-sin">sin</button>
+                    <button class="key-btn sci-btn" data-action="cos" id="btn-cos">cos</button>
+                    <button class="key-btn sci-btn" data-action="tan" id="btn-tan">tan</button>
+                    <button class="key-btn sci-btn" data-action="ln" id="btn-ln">ln</button>
+                    
+                    <!-- Row 2 -->
+                    <button class="key-btn sci-btn" data-action="log" id="btn-log">log</button>
+                    <button class="key-btn sci-btn" data-action="sqrt" id="btn-sqrt">√</button>
+                    <button class="key-btn sci-btn" data-action="square" id="btn-square">x²</button>
+                    <button class="key-btn sci-btn" data-action="power" id="btn-power">xʸ</button>
+                    
+                    <!-- Row 3 -->
+                    <button class="key-btn sci-btn" data-action="left-paren" id="btn-left-paren">(</button>
+                    <button class="key-btn sci-btn" data-action="right-paren" id="btn-right-paren">)</button>
+                    <button class="key-btn sci-btn" data-action="factorial" id="btn-factorial">n!</button>
+                    <button class="key-btn sci-btn" data-action="e-const" id="btn-e">e</button>
+                    
+                    <!-- Row 4 -->
+                    <button class="key-btn sci-btn" data-action="pi" id="btn-pi">π</button>
+                    <button class="key-btn sci-btn memory-btn" data-action="mc" id="btn-mc">MC</button>
+                    <button class="key-btn sci-btn memory-btn" data-action="mr" id="btn-mr">MR</button>
+                    <button class="key-btn sci-btn memory-btn" data-action="mplus" id="btn-mplus">M+</button>
+                </div>
+
+                <!-- Standard Keys Panel -->
+                <div class="standard-panel">
+                    <!-- Row 1 -->
+                    <button class="key-btn function-btn" data-action="clear" id="btn-clear">C</button>
+                    <button class="key-btn function-btn" data-action="percent" id="btn-percent">%</button>
+                    <button class="key-btn function-btn" data-action="backspace" id="btn-backspace">⌫</button>
+                    <button class="key-btn operator-btn" data-action="divide" id="btn-divide">÷</button>
+                    
+                    <!-- Row 2 -->
+                    <button class="key-btn digit-btn" data-val="7" id="btn-7">7</button>
+                    <button class="key-btn digit-btn" data-val="8" id="btn-8">8</button>
+                    <button class="key-btn digit-btn" data-val="9" id="btn-9">9</button>
+                    <button class="key-btn operator-btn" data-action="multiply" id="btn-multiply">×</button>
+                    
+                    <!-- Row 3 -->
+                    <button class="key-btn digit-btn" data-val="4" id="btn-4">4</button>
+                    <button class="key-btn digit-btn" data-val="5" id="btn-5">5</button>
+                    <button class="key-btn digit-btn" data-val="6" id="btn-6">6</button>
+                    <button class="key-btn operator-btn" data-action="subtract" id="btn-subtract">−</button>
+                    
+                    <!-- Row 4 -->
+                    <button class="key-btn digit-btn" data-val="1" id="btn-1">1</button>
+                    <button class="key-btn digit-btn" data-val="2" id="btn-2">2</button>
+                    <button class="key-btn digit-btn" data-val="3" id="btn-3">3</button>
+                    <button class="key-btn operator-btn" data-action="add" id="btn-add">+</button>
+                    
+                    <!-- Row 5 -->
+                    <button class="key-btn digit-btn double-width" data-val="0" id="btn-0">0</button>
+                    <button class="key-btn digit-btn" data-action="decimal" id="btn-decimal">.</button>
+                    <button class="key-btn equals-btn" data-action="equals" id="btn-equals">=</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- History Sliding Drawer -->
+        <aside class="history-drawer" id="history-drawer">
+            <div class="drawer-header">
+                <h3>Calculation History</h3>
+                <button class="icon-btn close-drawer-btn" id="close-history" aria-label="Close History">
+                    <svg viewBox="0 0 24 24" width="18" height="18">
+                        <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="history-content" id="history-content">
+                <div class="empty-history-msg">No history yet</div>
+            </div>
+            <div class="drawer-footer">
+                <button class="clear-history-btn" id="clear-history">Clear All</button>
+                <button class="download-history-btn" id="download-history">Download Logs</button>
+            </div>
+        </aside>
+
+        <!-- Test Suite Console Panel (Collapsible) -->
+        <section class="test-panel collapsed" id="test-panel">
+            <header class="test-header" id="test-header-toggle">
+                <div class="test-header-left">
+                    <span class="test-indicator pulse-red" id="test-indicator">●</span>
+                    <h4>Automated Self-Test Suite</h4>
+                </div>
+                <div class="test-header-actions">
+                    <button class="run-test-btn" id="run-tests-btn">Run Tests</button>
+                    <button class="icon-btn toggle-panel-btn" id="toggle-test-panel" aria-label="Toggle Test Panel">
+                        <svg viewBox="0 0 24 24" width="18" height="18" id="test-arrow-icon">
+                            <path fill="currentColor" d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z"/>
+                        </svg>
+                    </button>
+                </div>
+            </header>
+            <div class="test-body" id="test-body">
+                <div class="test-stats" id="test-stats">
+                    Click "Run Tests" to verify all calculations and keyboard simulations.
+                </div>
+                <ul class="test-list" id="test-list">
+                    <!-- Dynamic test results go here -->
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <!-- Main JavaScript Logic -->
+    <script src="script.js"></script>
+</body>
+</html>
